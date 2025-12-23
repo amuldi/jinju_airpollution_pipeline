@@ -1,0 +1,29 @@
+
+TRUNCATE TABLE stg_airpollution_jinju;
+
+INSERT INTO stg_airpollution_jinju (
+  measurement_time, pm25, pm10, no2, o3, co, so2,
+  addr, latitude, longitude, data_quality_flag
+)
+SELECT
+  STR_TO_DATE(TRIM(STNDR_DAYHMINSEC), '%Y%m%d%H%i%s'),
+  NULLIF(PM25_CTRN_MM3,'')+0,
+  NULLIF(PM10_CTRN_MM3,'')+0,
+  NULLIF(NO2_CTRN_PPM,'')+0,
+  NULLIF(O3_CTRN_PPM,'')+0,
+  NULLIF(CO_CTRN_PPM,'')+0,
+  NULLIF(SO2_CTRN_PPM,'')+0,
+  STNDR_ADDR,
+  CAST(LATITUDE AS DECIMAL(10,6)),
+  CAST(LONGITUDE AS DECIMAL(10,6)),
+  CASE
+    WHEN PM25_CTRN_MM3 IS NULL OR PM25_CTRN_MM3=''
+      OR PM10_CTRN_MM3 IS NULL OR PM10_CTRN_MM3=''
+      OR NO2_CTRN_PPM IS NULL OR NO2_CTRN_PPM=''
+      OR O3_CTRN_PPM IS NULL OR O3_CTRN_PPM=''
+      OR CO_CTRN_PPM IS NULL OR CO_CTRN_PPM=''
+      OR SO2_CTRN_PPM IS NULL OR SO2_CTRN_PPM=''
+    THEN 'MISSING' ELSE 'OK'
+  END
+FROM raw_airpollution_jinju
+WHERE STR_TO_DATE(TRIM(STNDR_DAYHMINSEC), '%Y%m%d%H%i%s') IS NOT NULL;
