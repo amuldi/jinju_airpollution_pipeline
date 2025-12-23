@@ -13,10 +13,15 @@ CSV → raw → stg → mart
 ## Folder Structure
 ```
 jinju_airpollution_pipeline/
-├─ sql/
-│  ├─ 11_load_raw.sql
-│  ├─ 12_transform_to_stg.sql
-│  └─ 13_aggregate_to_mart.sql
+├── ddl/
+│   ├── raw_airpollution_jinju.sql
+│   ├── stg_airpollution_jinju.sql
+│   └── mart_airpollution_hourly.sql
+│
+└── pipeline/
+    ├── 11_load_raw.sql
+    ├── 12_transform_to_stg.sql
+    └── 13_aggregate_to_mart.sql
 ```
 
 ## Description
