@@ -1,4 +1,3 @@
-
 TRUNCATE TABLE mart_airpollution_hourly;
 
 INSERT INTO mart_airpollution_hourly
