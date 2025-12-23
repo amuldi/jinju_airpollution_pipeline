@@ -1,4 +1,3 @@
-
 TRUNCATE TABLE stg_airpollution_jinju;
 
 INSERT INTO stg_airpollution_jinju (
