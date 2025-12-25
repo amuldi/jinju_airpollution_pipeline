@@ -28,7 +28,7 @@ jinju_airpollution_pipeline/
 - raw: 원본 CSV 적재
 - stg: 타입 변환, 결측치 처리
 - mart: 시간 단위 집계 테이블
-- 
+  
 ## How to Run
 1. Execute DDL scripts (once)
    - ddl/raw_airpollution_jinju.sql
